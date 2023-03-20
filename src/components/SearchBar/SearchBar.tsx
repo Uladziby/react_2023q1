@@ -2,7 +2,7 @@
 import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import { StyledClearIcon, StyledInput, StyledSearchIcon, StyledWrapper } from "./SearchBar.styles";
-import { Component, FormEvent } from "react";
+import { Component, SyntheticEvent } from "react";
 
 interface SearchBarProps {
 	onSearch: (searchTerm: string) => void;
@@ -28,13 +28,14 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
 		this.setState({ searchTerm: event.target.value });
 	}
 
-	handleSubmit(event: FormEvent<HTMLFormElement>) {
+	handleSubmit(event: SyntheticEvent) {
 		event.preventDefault();
-		this.clearInputField();
+		this.props.onSearch(this.state.searchTerm);
 	}
 
 	clearInputField() {
 		this.setState({ searchTerm: "" });
+		this.props.onSearch("");
 	}
 
 	componentWillUnmount() {
@@ -44,7 +45,13 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
 	render() {
 		return (
 			<StyledWrapper isOptionsVisible={false}>
-				<StyledSearchIcon iconTitle={"Search"}>
+				<StyledSearchIcon
+					iconTitle={"Search"}
+					type="submit"
+					onClick={(event) => {
+						this.handleSubmit(event);
+					}}
+				>
 					<SearchIcon />
 				</StyledSearchIcon>
 				<StyledInput
