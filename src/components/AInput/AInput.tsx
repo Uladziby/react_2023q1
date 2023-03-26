@@ -20,7 +20,7 @@ export const AInput = ({
 
 	return (
 		<StyledWrapper className={className}>
-			<StyledLabel htmlFor={name}>{label}</StyledLabel>
+			<StyledLabel aria-labelledby={name}>{label}</StyledLabel>
 			<StyledInput
 				name={name}
 				placeholder={placeholder}
