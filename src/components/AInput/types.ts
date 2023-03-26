@@ -1,11 +1,5 @@
 /** @format */
-import { SyntheticEvent } from "react";
-
-enum InputType {
-	text = "text",
-	date = "date",
-	switcher = "checkbox",
-}
+import { IOption } from "./../ASelect/type";
 
 export interface AInputProps {
 	type: string;
@@ -16,5 +10,6 @@ export interface AInputProps {
 	isDisabled?: boolean;
 	className?: string;
 	value: string;
-	onChange: (ev: React.FormEvent<HTMLInputElement>) => void;
+	error?: string;
+	onChange: (value: IOption) => void;
 }

@@ -1,7 +1,13 @@
 /** @format */
-
 export interface ASelectProps {
 	className?: string;
 	options: string[];
-	onChange: (ev: React.FormEvent<HTMLInputElement>) => void;
+	value: string;
+	name: string;
+	error: string;
+	onChange: (option: IOption) => void;
+}
+
+export interface IOption {
+	[x: string]: string;
 }

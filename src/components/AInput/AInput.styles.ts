@@ -1,6 +1,6 @@
 /** @format */
 import { COLOR_PALETTE, INPUT_COLORS } from "../../constants/colors/colors";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const StyledInput = styled.input`
 	width: 343px;
@@ -42,6 +42,7 @@ export const StyledIconWrapper = styled.div`
 export const StyledWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	margin: 0 20px;
 `;
 
 export const StyledLabel = styled.label`
@@ -50,4 +51,9 @@ export const StyledLabel = styled.label`
 	color: ${INPUT_COLORS.default};
 	font-size: 14px;
 	margin-bottom: 5px;
+`;
+export const StyledErrorMessage = styled.div`
+	text-align: start;
+	font-size: 12px;
+	color: ${COLOR_PALETTE.error};
 `;

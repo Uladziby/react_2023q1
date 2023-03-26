@@ -1,16 +1,12 @@
 /** @format */
-import { StyledLabel } from "../AInput/AInput.styles";
+import { StyledErrorMessage, StyledLabel } from "../AInput/AInput.styles";
 import { Select, SelectWrapper } from "./ASelect.styles";
 import { ASelectProps } from "./type";
 import { Component, ReactNode } from "react";
 
 export class ASelect extends Component<ASelectProps> {
-	state = {
-		selectedCountry: "",
-	};
-
 	handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		this.setState({ selectedCountry: event.target.value });
+		this.props.onChange({ [this.props.name]: event.target.value });
 	}
 
 	render(): ReactNode {
@@ -19,10 +15,10 @@ export class ASelect extends Component<ASelectProps> {
 				<StyledLabel htmlFor="country-select">Select a country:</StyledLabel>
 				<Select
 					id="country-select"
-					value={this.state.selectedCountry}
+					value={this.props.value}
 					onChange={this.handleSelectChange.bind(this)}
 				>
-					<option value="">Select your country</option>
+					<option>Choose your country</option>
 					{this.props.options.map((country) => {
 						return (
 							<option key={country} value={country}>
@@ -31,6 +27,7 @@ export class ASelect extends Component<ASelectProps> {
 						);
 					})}
 				</Select>
+				{this.props.error && <StyledErrorMessage> This field is requiered</StyledErrorMessage>}
 			</SelectWrapper>
 		);
 	}

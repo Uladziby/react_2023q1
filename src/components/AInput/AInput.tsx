@@ -1,5 +1,5 @@
 /** @format */
-import { StyledInput, StyledLabel, StyledWrapper } from "./AInput.styles";
+import { StyledErrorMessage, StyledInput, StyledLabel, StyledWrapper } from "./AInput.styles";
 import { AInputProps } from "./types";
 
 export const AInput = ({
@@ -11,7 +11,13 @@ export const AInput = ({
 	name,
 	onChange,
 	value,
+	error,
 }: AInputProps) => {
+	const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const value = event.currentTarget.value;
+		onChange({ [name]: value });
+	};
+
 	return (
 		<StyledWrapper className={className}>
 			<StyledLabel htmlFor={name}>{label}</StyledLabel>
@@ -20,9 +26,10 @@ export const AInput = ({
 				placeholder={placeholder}
 				disabled={isDisabled}
 				type={type}
-				onChange={onChange}
+				onChange={handleSelectChange}
 				value={value}
 			/>
+			{error && <StyledErrorMessage> This field is required</StyledErrorMessage>}
 		</StyledWrapper>
 	);
 };

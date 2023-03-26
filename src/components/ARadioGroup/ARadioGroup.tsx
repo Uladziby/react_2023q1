@@ -1,20 +1,12 @@
 /** @format */
+import { StyledErrorMessage } from "../AInput/AInput.styles";
 import { StyledContainer } from "./ARadioGroup.styles";
+import { RadioGroupProps } from "./type";
 import { Component } from "react";
 
-export interface RadioGroupProps {
-	options: { label: string; value: string }[];
-	name: string;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 export class ARadioGroup extends Component<RadioGroupProps> {
-	state = {
-		selectedValue: "",
-	};
-
 	handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		this.setState({ selectedValue: event.target.value });
+		this.props.onChange({ [this.props.name]: event.target.value });
 	}
 
 	render() {
@@ -24,14 +16,15 @@ export class ARadioGroup extends Component<RadioGroupProps> {
 					<label key={option.label}>
 						<input
 							type="radio"
-							name={option.value}
+							name={this.props.name}
 							value={option.value}
-							checked={this.state.selectedValue === option.value}
+							checked={this.props.value === option.value}
 							onChange={this.handleInputChange.bind(this)}
 						/>
 						{option.label}
 					</label>
 				))}
+				{this.props.error && <StyledErrorMessage> This field is requiered</StyledErrorMessage>}
 			</StyledContainer>
 		);
 	}

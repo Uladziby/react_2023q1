@@ -1,17 +1,14 @@
 /** @format */
 import { ATitle } from "../ATitle/ATitle";
 import { StyledContainer, StyledImage } from "./AImgeInput.styles";
+import { AImageInputProps } from "./type";
 import { Component, ReactNode } from "react";
 
-export class AImageInput extends Component {
-	state = {
-		uploadedImage: "",
-	};
-
+export class AImageInput extends Component<AImageInputProps> {
 	handleSelectChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const file = event.target.files && event.target.files[0];
-		if (file) {
-			this.setState({ uploadedImage: file });
+		if (file && event.target.files) {
+			this.props.onChange({ image: URL.createObjectURL(event.target.files[0]) });
 		}
 	}
 
@@ -22,18 +19,13 @@ export class AImageInput extends Component {
 					Choose a profile picture:
 				</ATitle>
 				<input
+					name={this.props.name}
 					id="avatar"
 					type="file"
-					placeholder="Your Avatar"
 					accept="image/png, image/jpeg"
 					onChange={this.handleSelectChange.bind(this)}
 				/>
-				{this.state.uploadedImage && (
-					<StyledImage
-						src={URL.createObjectURL(this.state.uploadedImage as unknown as MediaSource)}
-						alt="Selected"
-					/>
-				)}
+				{this.props.value && <StyledImage src={this.props.value} alt={this.props.name} />}
 			</StyledContainer>
 		);
 	}

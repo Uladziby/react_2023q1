@@ -1,7 +1,12 @@
 /** @format */
+import { IOption } from "./../ASelect/type";
+
+/** @format */
 
 export interface RadioGroupProps {
 	options: { label: string; value: string }[];
 	name: string;
-	onChange: (value: string) => void;
+	value: string;
+	error: string;
+	onChange: (option: IOption) => void;
 }
