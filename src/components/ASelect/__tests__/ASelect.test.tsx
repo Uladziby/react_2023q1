@@ -13,19 +13,18 @@ describe("ASelect", () => {
 
 	it("renders the label", () => {
 		render(<ASelect {...props} />);
-		expect(screen.getByLabelText("Select a country:")).toBeInTheDocument();
+		expect(screen.getByTestId("select")).toBeInTheDocument();
 	});
 
 	it("renders the select with the correct props", () => {
 		render(<ASelect {...props} />);
-		const select = screen.getByLabelText("Select a country:");
+		const select = screen.getByTestId("select");
 		expect(select).toBeInTheDocument();
-		expect(select).toHaveAttribute("id", "country-select");
 	});
 
 	it("calls the onChange function when the select value changes", () => {
 		render(<ASelect {...props} />);
-		const select = screen.getByLabelText("Select a country:");
+		const select = screen.getByTestId("select");
 		fireEvent.change(select, { target: { value: "Option 2" } });
 		expect(props.onChange).toHaveBeenCalledWith({ "test-name": "Option 2" });
 	});

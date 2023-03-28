@@ -11,5 +11,6 @@ export interface AInputProps {
 	className?: string;
 	value: string;
 	error?: string;
+	dataTestId?: string;
 	onChange: (value: IOption) => void;
 }

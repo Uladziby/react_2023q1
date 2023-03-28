@@ -15,6 +15,7 @@ export class ARadioGroup extends Component<RadioGroupProps> {
 				{this.props.options.map((option) => (
 					<label key={option.label}>
 						<input
+							aria-labelledby={this.props.name}
 							type="radio"
 							name={this.props.name}
 							value={option.value}

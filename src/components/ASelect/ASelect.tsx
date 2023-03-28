@@ -12,8 +12,9 @@ export class ASelect extends Component<ASelectProps> {
 	render(): ReactNode {
 		return (
 			<SelectWrapper>
-				<StyledLabel htmlFor="country-select">Select a country:</StyledLabel>
+				<StyledLabel aria-label={this.props.name}>Select a country:</StyledLabel>
 				<Select
+					data-testid="select"
 					id="country-select"
 					value={this.props.value}
 					onChange={this.handleSelectChange.bind(this)}

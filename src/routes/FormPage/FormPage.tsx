@@ -5,6 +5,7 @@ import ARadioGroup from "../../components/ARadioGroup/ARadioGroup";
 import { ASelect } from "../../components/ASelect/ASelect";
 import { IOption } from "../../components/ASelect/type";
 import { ATitle } from "../../components/ATitle/ATitle";
+import { CardForm } from "./CardForm/CardForm ";
 import {
 	StyledButton,
 	StyledContainer,
@@ -40,7 +41,15 @@ const initialState = {
 
 export class FormPage extends Component<IFormPageProps, IFormPageState> {
 	state = { ...initialState };
-	formSubmitted = {};
+	formSubmitted: IFormPageState = {
+		firstName: "",
+		lastName: "",
+		country: "",
+		birthDay: "",
+		gender: "",
+		image: "",
+		errors: {},
+	};
 	isFormSubmitted = false;
 
 	onSubmit(event: FormEvent) {
@@ -100,6 +109,7 @@ export class FormPage extends Component<IFormPageProps, IFormPageState> {
 					<StyledDateAInput
 						name="birthDay"
 						label="Birth day*"
+						dataTestId="input-date"
 						type="date"
 						onChange={this.handlerOnChange.bind(this)}
 						value={this.state.birthDay}
@@ -129,7 +139,7 @@ export class FormPage extends Component<IFormPageProps, IFormPageState> {
 				{this.isFormSubmitted && (
 					<div>
 						New user was added
-						{JSON.stringify(this.formSubmitted)}
+						<CardForm datd-testid="cardForm" data={this.formSubmitted} />
 					</div>
 				)}
 			</StyledContainer>
