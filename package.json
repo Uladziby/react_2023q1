@@ -18,7 +18,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test --coverage",
+		"test": " react-scripts test --coverage --watchAll",
 		"eject": "react-scripts eject",
 		"format": "prettier --write src/**/*.{js,ts,tsx,json,css,scss,md}",
 		"eslint": "eslint \"./src/**/*.js\" \"./src/**/*.jsx\" \"./src/**/*.ts\" \"./src/**/*.tsx\" --no-error-on-unmatched-pattern",

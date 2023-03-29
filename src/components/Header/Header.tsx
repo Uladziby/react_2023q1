@@ -29,6 +29,13 @@ const Header = () => {
 					>
 						About Us
 					</NavLink>
+					<NavLink
+						className={styles.navlink}
+						to={"/forms"}
+						style={({ isActive }) => (isActive ? activeStyle : undefined)}
+					>
+						Forms
+					</NavLink>
 				</div>
 			</div>
 			<div className={styles.header__bottom}></div>
