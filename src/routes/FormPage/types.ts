@@ -20,5 +20,3 @@ export interface IFormErrors {
 	gender: string;
 	image: string;
 }
-
-export interface IFormPageProps {}

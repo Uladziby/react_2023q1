@@ -2,8 +2,8 @@
 import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import { StyledClearIcon, StyledInput, StyledSearchIcon, StyledWrapper } from "./SearchBar.styles";
-import { SearchBarProps, SearchBarState } from "./type";
-import { Component, SyntheticEvent, useEffect, useState } from "react";
+import { SearchBarProps } from "./type";
+import { SyntheticEvent, useEffect, useState } from "react";
 
 export const SearchBar = ({ onSearch }: SearchBarProps) => {
 	const [searchTerm, setSearchTerm] = useState(localStorage.getItem("searchTerm") || "");
