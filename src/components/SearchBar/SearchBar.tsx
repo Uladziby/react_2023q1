@@ -2,71 +2,45 @@
 import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import { StyledClearIcon, StyledInput, StyledSearchIcon, StyledWrapper } from "./SearchBar.styles";
-import { Component, SyntheticEvent } from "react";
+import { SearchBarProps, SearchBarState } from "./type";
+import { Component, SyntheticEvent, useEffect, useState } from "react";
 
-interface SearchBarProps {
-	onSearch: (searchTerm: string) => void;
-}
+export const SearchBar = ({ onSearch }: SearchBarProps) => {
+	const [searchTerm, setSearchTerm] = useState(localStorage.getItem("searchTerm") || "");
 
-interface SearchBarState {
-	searchTerm: string;
-}
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(event.target.value);
+	};
 
-class SearchBar extends Component<SearchBarProps, SearchBarState> {
-	constructor(props: SearchBarProps) {
-		super(props);
-		this.state = {
-			searchTerm: localStorage.getItem("searchTerm") || "",
-		};
-
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.clearInputField = this.clearInputField.bind(this);
-	}
-
-	handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		this.setState({ searchTerm: event.target.value });
-	}
-
-	handleSubmit(event: SyntheticEvent) {
+	const handleSubmit = (event: SyntheticEvent) => {
 		event.preventDefault();
-		this.props.onSearch(this.state.searchTerm);
-	}
+		onSearch(searchTerm);
+	};
 
-	clearInputField() {
-		this.setState({ searchTerm: "" });
-		this.props.onSearch("");
-	}
+	const clearInputField = () => {
+		setSearchTerm("");
+		onSearch("");
+	};
 
-	componentWillUnmount() {
-		localStorage.setItem("searchTerm", this.state.searchTerm);
-	}
+	useEffect(() => {
+		return localStorage.setItem("searchTerm", searchTerm);
+	});
 
-	render() {
-		return (
-			<StyledWrapper isOptionsVisible={false}>
-				<StyledSearchIcon
-					iconTitle={"Search"}
-					type="submit"
-					onClick={(event) => {
-						this.handleSubmit(event);
-					}}
-				>
-					<SearchIcon />
-				</StyledSearchIcon>
-				<StyledInput
-					type="text"
-					placeholder={"insert a product"}
-					disabled={false}
-					value={this.state.searchTerm}
-					onChange={this.handleInputChange}
-				/>
-				<StyledClearIcon iconTitle={"Search"} onClick={this.clearInputField}>
-					<ClearIcon />
-				</StyledClearIcon>
-			</StyledWrapper>
-		);
-	}
-}
-
-export default SearchBar;
+	return (
+		<StyledWrapper isOptionsVisible={false}>
+			<StyledSearchIcon iconTitle={"Search"} type="submit" onClick={handleSubmit}>
+				<SearchIcon />
+			</StyledSearchIcon>
+			<StyledInput
+				type="text"
+				placeholder={"insert a product"}
+				disabled={false}
+				value={searchTerm}
+				onChange={handleInputChange}
+			/>
+			<StyledClearIcon iconTitle={"Search"} onClick={clearInputField}>
+				<ClearIcon />
+			</StyledClearIcon>
+		</StyledWrapper>
+	);
+};
