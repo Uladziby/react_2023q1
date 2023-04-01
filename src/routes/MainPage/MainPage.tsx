@@ -8,13 +8,25 @@ import { useEffect, useState } from "react";
 
 export const MainPage = () => {
 	const [products, setProducts] = useState<ICard[]>();
-	const [filteredProducts, setFilteredProducts] = useState<ICard[]>();
+	const [filteredProducts, setFilteredProducts] = useState<ICard[]>([]);
+	const [searchTerm] = useState(localStorage.getItem("searchTerm") || "");
 
 	useEffect(() => {
 		getAllProducts(10).then((response) => {
 			setProducts(response);
 		});
 	}, []);
+
+	useEffect(() => {
+		filterByTitle(searchTerm);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [products]);
+
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			filterByTitle(event.currentTarget.value);
+		}
+	};
 
 	const filterByTitle = (title: string) => {
 		if (products) {
@@ -28,11 +40,11 @@ export const MainPage = () => {
 
 	return (
 		<>
-			<SearchBar onSearch={filterByTitle} />
+			<SearchBar onSearch={filterByTitle} onKeyPress={handleKeyPress} />
 			<StyledContainer>
-				{filteredProducts?.length !== 0
-					? filteredProducts!.map((item) => <ACard key={item.id} item={item} />)
-					: products!.map((item) => <ACard key={item.id} item={item} />)}
+				{filteredProducts.map((item) => (
+					<ACard key={item.id} item={item} />
+				))}
 			</StyledContainer>
 		</>
 	);

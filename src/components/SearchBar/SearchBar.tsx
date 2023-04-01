@@ -4,12 +4,15 @@ import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import { StyledClearIcon, StyledInput, StyledSearchIcon, StyledWrapper } from "./SearchBar.styles";
 import { SearchBarProps } from "./type";
 import { SyntheticEvent, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-export const SearchBar = ({ onSearch }: SearchBarProps) => {
-	const [searchTerm, setSearchTerm] = useState(localStorage.getItem("searchTerm") || "");
+export const SearchBar = ({ onSearch, onKeyPress }: SearchBarProps) => {
+	const location = useLocation();
+	const [searchTerm, setSearchTerm] = useState(localStorage.getItem("searchTerm") || " ");
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(event.target.value);
+		console.log(searchTerm);
 	};
 
 	const handleSubmit = (event: SyntheticEvent) => {
@@ -23,8 +26,8 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
 	};
 
 	useEffect(() => {
-		return localStorage.setItem("searchTerm", searchTerm);
-	});
+		return () => localStorage.setItem("searchTerm", searchTerm);
+	}, [searchTerm, location.pathname]);
 
 	return (
 		<StyledWrapper isOptionsVisible={false}>
@@ -37,6 +40,7 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
 				disabled={false}
 				value={searchTerm}
 				onChange={handleInputChange}
+				onKeyUp={onKeyPress}
 			/>
 			<StyledClearIcon iconTitle={"Search"} onClick={clearInputField}>
 				<ClearIcon />
