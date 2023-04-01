@@ -2,25 +2,24 @@
 import { StyledErrorMessage, StyledLabel } from "../AInput/AInput.styles";
 import { Select, SelectWrapper } from "./ASelect.styles";
 import { ASelectProps } from "./type";
-import { Component, ReactNode } from "react";
 
-export class ASelect extends Component<ASelectProps> {
-	handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		this.props.onChange({ [this.props.name]: event.target.value });
+export const ASelect = ({name, value, onChange, options, error}:ASelectProps) => {
+
+	const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>)=> {
+		onChange({ [name]: event.target.value });
 	}
 
-	render(): ReactNode {
 		return (
 			<SelectWrapper>
-				<StyledLabel aria-label={this.props.name}>Select a country:</StyledLabel>
+				<StyledLabel aria-label={name}>Select a country:</StyledLabel>
 				<Select
 					data-testid="select"
 					id="country-select"
-					value={this.props.value}
-					onChange={this.handleSelectChange.bind(this)}
+					value={value}
+					onChange={handleSelectChange}
 				>
 					<option>Choose your country</option>
-					{this.props.options.map((country) => {
+					{options.map((country) => {
 						return (
 							<option key={country} value={country}>
 								{country}
@@ -28,8 +27,8 @@ export class ASelect extends Component<ASelectProps> {
 						);
 					})}
 				</Select>
-				{this.props.error && <StyledErrorMessage> This field is requiered</StyledErrorMessage>}
+				{error && <StyledErrorMessage> This field is requiered</StyledErrorMessage>}
 			</SelectWrapper>
 		);
-	}
+	
 }
