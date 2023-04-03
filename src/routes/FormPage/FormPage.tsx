@@ -8,6 +8,7 @@ import { ATitle } from "../../components/ATitle/ATitle";
 import { CardForm } from "./CardForm/CardForm ";
 import {
 	StyledButton,
+	StyledCardContainer,
 	StyledContainer,
 	StyledDateAInput,
 	StyledForm,
@@ -41,8 +42,7 @@ const initialState: IFormPageState = {
 
 export const FormPage = () => {
 	const [stateForm, setStateForm] = useState<IFormPageState>({ ...initialState });
-	const [formSubmitted, setFormSubmitted] = useState<IFormPageState>({ ...initialState });
-	const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+	const [userCards, setUserCard] = useState<IFormPageState[]>([]);
 
 	const onSubmit = (event: FormEvent) => {
 		event.preventDefault();
@@ -53,8 +53,7 @@ export const FormPage = () => {
 			return;
 		}
 
-		setIsFormSubmitted(true);
-		setFormSubmitted({ ...stateForm, errors: {} });
+		setUserCard([...userCards, stateForm]);
 		resetForm();
 	};
 
@@ -123,12 +122,11 @@ export const FormPage = () => {
 				<AImageInput name="image" value={stateForm.image} onChange={handlerOnChange} />
 				<StyledButton type="submit">Submit</StyledButton>
 			</StyledForm>
-			{isFormSubmitted && (
-				<div>
-					New user was added
-					<CardForm datd-testid="cardForm" data={formSubmitted} />
-				</div>
-			)}
+			<StyledCardContainer>
+				{userCards.map((card) => (
+					<CardForm datd-testid="cardForm" data={card} />
+				))}
+			</StyledCardContainer>
 		</StyledContainer>
 	);
 };

@@ -1,6 +1,4 @@
 /** @format */
-
-/** @format */
 import { AButton } from "./../../components/AButton/AButton";
 import { AInput } from "./../../components/AInput/AInput";
 import { COLOR_PALETTE } from "./../../constants/colors/colors";
@@ -15,6 +13,9 @@ export const StyledContainer = styled.section`
 	max-width: 600px;
 	min-width: 500px;
 	padding: 0 68px;
+`;
+export const StyledCardContainer = styled.div`
+	display: flex;
 `;
 
 export const StyledHeader = styled.div`
