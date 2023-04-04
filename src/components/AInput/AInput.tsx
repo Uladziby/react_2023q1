@@ -1,6 +1,7 @@
 /** @format */
 import { StyledErrorMessage, StyledInput, StyledLabel, StyledWrapper } from "./AInput.styles";
 import { AInputProps } from "./types";
+import { useController } from "react-hook-form";
 
 export const AInput = ({
 	placeholder,
@@ -9,29 +10,25 @@ export const AInput = ({
 	type,
 	className,
 	name,
-	onChange,
-	value,
-	error,
 	dataTestId,
 }: AInputProps) => {
-	const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const value = event.currentTarget.value;
-		onChange({ [name]: value });
-	};
+	const {
+		field,
+		fieldState: { error },
+		formState: { isValid, isDirty },
+	} = useController({ name, shouldUnregister: true, defaultValue: "", rules: { required: true } });
 
 	return (
 		<StyledWrapper className={className}>
 			<StyledLabel aria-label={name}>{label}</StyledLabel>
 			<StyledInput
+				{...field}
 				data-testid={dataTestId}
 				name={name}
 				placeholder={placeholder}
-				disabled={isDisabled}
 				type={type}
-				onChange={handleSelectChange}
-				value={value}
 			/>
-			{error && <StyledErrorMessage> This field is required</StyledErrorMessage>}
+			{!isValid && isDirty && <StyledErrorMessage> {error?.type}</StyledErrorMessage>}
 		</StyledWrapper>
 	);
 };

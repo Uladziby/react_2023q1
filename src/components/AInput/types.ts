@@ -9,8 +9,8 @@ export interface AInputProps {
 	hasError?: boolean;
 	isDisabled?: boolean;
 	className?: string;
-	value: string;
+	value?: string;
 	error?: string;
 	dataTestId?: string;
-	onChange: (value: IOption) => void;
+	onChange?: (value: IOption) => void;
 }
