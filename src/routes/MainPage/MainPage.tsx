@@ -1,52 +1,51 @@
 /** @format */
-import { ACard, ICard } from "../../components/ACard/ACard";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import { ACard } from "../../components/ACard/ACard";
+import { ICard } from "../../components/ACard/type";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { StyledContainer } from "./MainPage.styles";
 import { getAllProducts } from "./api";
-import React from "react";
+import { useEffect, useState } from "react";
 
-interface MainPageState {
-	products: ICard[];
-	filteredProducts: ICard[];
-}
-type MainPageProps = {};
-export class MainPage extends React.Component<MainPageProps, MainPageState> {
-	constructor(props: MainPageProps) {
-		super(props);
-		this.state = {
-			products: [],
-			filteredProducts: [],
-		};
-		this.filterByTitle = this.filterByTitle.bind(this);
-	}
+export const MainPage = () => {
+	const [products, setProducts] = useState<ICard[]>();
+	const [filteredProducts, setFilteredProducts] = useState<ICard[]>([]);
+	const [searchTerm] = useState(localStorage.getItem("searchTerm") || "");
 
-	componentDidMount(): void {
+	useEffect(() => {
 		getAllProducts(10).then((response) => {
-			this.setState({ products: response });
+			setProducts(response);
 		});
-	}
+	}, []);
 
-	filterByTitle(title: string) {
-		if (this.state.products) {
-			this.setState({
-				filteredProducts: this.state.products.filter((product) =>
-					product.title.toLowerCase().includes(title.toLocaleLowerCase())
-				),
-			});
+	useEffect(() => {
+		filterByTitle(searchTerm);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [products]);
+
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			filterByTitle(event.currentTarget.value);
 		}
-	}
+	};
 
-	render() {
-		return (
-			<>
-				<SearchBar onSearch={this.filterByTitle} />
-				<StyledContainer>
-					{this.state.filteredProducts.length !== 0
-						? this.state.filteredProducts.map((item) => <ACard key={item.id} item={item} />)
-						: this.state.products.map((item) => <ACard key={item.id} item={item} />)}
-					{}
-				</StyledContainer>
-			</>
-		);
-	}
-}
+	const filterByTitle = (title: string) => {
+		if (products) {
+			setFilteredProducts(
+				products.filter((product) =>
+					product.title.toLowerCase().includes(title.toLocaleLowerCase())
+				)
+			);
+		}
+	};
+
+	return (
+		<>
+			<SearchBar onSearch={filterByTitle} onKeyPress={handleKeyPress} />
+			<StyledContainer>
+				{filteredProducts.map((item) => (
+					<ACard key={item.id} item={item} />
+				))}
+			</StyledContainer>
+		</>
+	);
+};

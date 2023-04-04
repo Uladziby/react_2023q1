@@ -1,6 +1,4 @@
 /** @format */
-
-/** @format */
 import { AButton } from "./../../components/AButton/AButton";
 import { AInput } from "./../../components/AInput/AInput";
 import { COLOR_PALETTE } from "./../../constants/colors/colors";
@@ -9,21 +7,28 @@ import styled from "styled-components";
 export const StyledContainer = styled.section`
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	flex-direction: column;
 	margin: auto;
-	max-width: 600px;
-	min-width: 500px;
+	width: 500px;
+
 	padding: 0 68px;
+	gap: 10px;
+	background-color: ${COLOR_PALETTE.lighten60};
+`;
+
+export const StyledCardContainer = styled.div`
+	display: flex;
 `;
 
 export const StyledHeader = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	margin: auto;
 	color: ${COLOR_PALETTE.lighten100};
 	background-color: ${COLOR_PALETTE.lighten40};
+	width: 635px;
 `;
 
 export const StyledButton = styled(AButton)`
@@ -34,7 +39,7 @@ export const StyledButton = styled(AButton)`
 	border-radius: 16px;
 
 	&:hover {
-		color: ${COLOR_PALETTE.lighten40};
+		color: ${COLOR_PALETTE.lighten30};
 	}
 `;
 
@@ -45,7 +50,6 @@ export const StyledForm = styled.form`
 	padding-bottom: 40px;
 	width: 100%;
 	padding: 20px 0;
-	background-color: ${COLOR_PALETTE.lighten60};
 `;
 
 export const StyledBlock = styled.div`

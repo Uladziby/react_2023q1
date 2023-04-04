@@ -4,8 +4,8 @@ export interface ASelectProps {
 	options: string[];
 	value: string;
 	name: string;
-	error: string;
-	onChange: (option: IOption) => void;
+	error?: string;
+	onChange?: (option: IOption) => void;
 }
 
 export interface IOption {

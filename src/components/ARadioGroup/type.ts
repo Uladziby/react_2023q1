@@ -6,7 +6,6 @@ import { IOption } from "./../ASelect/type";
 export interface RadioGroupProps {
 	options: { label: string; value: string }[];
 	name: string;
-	value: string;
-	error: string;
-	onChange: (option: IOption) => void;
+	value?: string;
+	onChange?: (option: IOption) => void;
 }

@@ -1,28 +1,28 @@
 /** @format */
+import { AForm } from "../../components/AForm/AForm";
 import { AImageInput } from "../../components/AImageInput/AImageInput";
 import { AInput } from "../../components/AInput/AInput";
-import ARadioGroup from "../../components/ARadioGroup/ARadioGroup";
+import { ARadioGroup } from "../../components/ARadioGroup/ARadioGroup";
 import { ASelect } from "../../components/ASelect/ASelect";
-import { IOption } from "../../components/ASelect/type";
 import { ATitle } from "../../components/ATitle/ATitle";
 import { CardForm } from "./CardForm/CardForm ";
 import {
 	StyledButton,
+	StyledCardContainer,
 	StyledContainer,
 	StyledDateAInput,
-	StyledForm,
 	StyledHeader,
 } from "./FormPage.styles";
-import { IFormPageProps, IFormPageState } from "./types";
-import { validateForm } from "./validateForm";
-import { Component, FormEvent } from "react";
+import { IFormPageState } from "./types";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const countryOptions = ["Norway", "Sweden", "Estonia", "Finland", "Dennmark"];
 const radioOptions = [
 	{ label: "Female", value: "Female" },
 	{ label: "Male", value: "Male" },
 ];
-const initialState = {
+const initialState: IFormPageState = {
 	firstName: "",
 	lastName: "",
 	birthDay: "",
@@ -39,110 +39,51 @@ const initialState = {
 	},
 };
 
-export class FormPage extends Component<IFormPageProps, IFormPageState> {
-	state = { ...initialState };
-	formSubmitted: IFormPageState = {
-		firstName: "",
-		lastName: "",
-		country: "",
-		birthDay: "",
-		gender: "",
-		image: "",
-		errors: {},
-	};
-	isFormSubmitted = false;
+export const FormPage = () => {
+	const form = useForm<IFormPageState>({
+		mode: "onSubmit",
+	});
 
-	onSubmit(event: FormEvent) {
-		event.preventDefault();
-		const errors = validateForm(this.state);
+	const { reset, register } = form;
 
-		if (Object.keys(errors).length > 0) {
-			this.setState({ errors });
-			return;
-		}
+	const [stateForm] = useState<IFormPageState>({ ...initialState });
+	const [userCards, setUserCard] = useState<IFormPageState[]>([]);
 
-		this.isFormSubmitted = true;
-		this.formSubmitted = { ...this.state, errors: {} };
-		this.resetForm();
-	}
-
-	resetForm() {
-		this.setState({ ...initialState });
-	}
-
-	handlerOnChange = (option: IOption) => {
-		const newState: IFormPageState = {
-			...this.state,
-			...option,
-		};
-
-		this.setState(newState);
+	const onSubmit = (data: IFormPageState) => {
+		setUserCard([
+			...userCards,
+			{ ...data, image: URL.createObjectURL(data.image[0] as unknown as Blob) },
+		]);
+		reset();
 	};
 
-	render() {
-		return (
+	return (
+		<AForm onSubmit={onSubmit} form={form}>
+			<StyledHeader>
+				<ATitle size={40} weight={500} lineHeight={47}>
+					Add new user
+				</ATitle>
+			</StyledHeader>
 			<StyledContainer>
-				<StyledHeader>
-					<ATitle size={40} weight={500} lineHeight={47}>
-						Add new user
-					</ATitle>
-				</StyledHeader>
-				<StyledForm onSubmit={this.onSubmit.bind(this)}>
-					<AInput
-						type="text"
-						name="firstName"
-						placeholder="First name"
-						label="First name"
-						value={this.state.firstName}
-						onChange={this.handlerOnChange.bind(this)}
-						error={this.state.errors["firstName"]}
-					/>
-					<AInput
-						type="text"
-						name="lastName"
-						label="Last name"
-						placeholder="Last name"
-						value={this.state.lastName}
-						onChange={this.handlerOnChange.bind(this)}
-						error={this.state.errors["lastName"]}
-					/>
-					<StyledDateAInput
-						name="birthDay"
-						label="Birth day*"
-						dataTestId="input-date"
-						type="date"
-						onChange={this.handlerOnChange.bind(this)}
-						value={this.state.birthDay}
-						error={this.state.errors["birthDay"]}
-					/>
-					<ASelect
-						name="country"
-						value={this.state.country}
-						onChange={this.handlerOnChange.bind(this)}
-						options={countryOptions}
-						error={this.state.errors["country"]}
-					/>
-					<ARadioGroup
-						name="gender"
-						options={radioOptions}
-						onChange={this.handlerOnChange.bind(this)}
-						value={this.state.gender}
-						error={this.state.errors["gender"]}
-					/>
-					<AImageInput
-						name="image"
-						value={this.state.image}
-						onChange={this.handlerOnChange.bind(this)}
-					/>
-					<StyledButton type="submit">Submit</StyledButton>
-				</StyledForm>
-				{this.isFormSubmitted && (
-					<div>
-						New user was added
-						<CardForm datd-testid="cardForm" data={this.formSubmitted} />
-					</div>
-				)}
+				<AInput type="text" name="firstName" placeholder="First name" label="First name" />
+				<AInput type="text" name="lastName" label="Last name" placeholder="Last name" />
+				<StyledDateAInput
+					name="birthDay"
+					label="Birth day*"
+					dataTestId="input-date"
+					type="date"
+					value={stateForm.birthDay}
+				/>
+				<ASelect name="country" value={stateForm.country} options={countryOptions} />
+				<ARadioGroup name="gender" options={radioOptions} />
+				<AImageInput register={register} name="image" />
+				<StyledButton type="submit">Submit</StyledButton>
+				<StyledCardContainer>
+					{userCards.map((card, idx) => (
+						<CardForm key={idx} datd-testid="cardForm" data={card} />
+					))}
+				</StyledCardContainer>
 			</StyledContainer>
-		);
-	}
-}
+		</AForm>
+	);
+};
