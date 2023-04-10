@@ -1,6 +1,7 @@
 /** @format */
 import { ASelect } from "../ASelect";
 import { render, fireEvent, screen } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 
 describe("ASelect", () => {
 	const props = {
@@ -25,7 +26,10 @@ describe("ASelect", () => {
 	it("calls the onChange function when the select value changes", () => {
 		render(<ASelect {...props} />);
 		const select = screen.getByTestId("select");
-		fireEvent.change(select, { target: { value: "Option 2" } });
+
+		act(() => {
+			fireEvent.change(select, { target: { value: "Option 2" } });
+		});
 		expect(props.onChange).toHaveBeenCalledWith({ "test-name": "Option 2" });
 	});
 
