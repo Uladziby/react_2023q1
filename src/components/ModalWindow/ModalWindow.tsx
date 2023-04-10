@@ -1,14 +1,6 @@
 /** @format */
-import { ReactComponent as IconBack } from "../../assets/icons/back_icon.svg";
 import { ReactComponent as IconCross } from "../../assets/icons/cross_icon.svg";
-import {
-	BackButton,
-	CloseButton,
-	StyledContainer,
-	StyledCover,
-	StyledHeader,
-	StyledText,
-} from "./ModalWindow.styles";
+import { CloseButton, StyledContainer, StyledCover, StyledHeader } from "./ModalWindow.styles";
 import { ModalWindowProps } from "./type";
 import { MouseEvent } from "react";
 import ReactDOM from "react-dom";
@@ -29,13 +21,7 @@ export const ModalWindow = ({
 	const createWrapper = () => (
 		<StyledContainer>
 			<StyledHeader>
-				{onBackHandler && (
-					<BackButton onClick={onBackHandler} data-testid="modalBackButton">
-						<IconBack />
-						<StyledText>Back</StyledText>
-					</BackButton>
-				)}
-				<CloseButton onClick={onClose} data-testid="modalCloseButton">
+				<CloseButton onClick={onClose} data-testId="modalCloseButton">
 					<IconCross />
 				</CloseButton>
 			</StyledHeader>

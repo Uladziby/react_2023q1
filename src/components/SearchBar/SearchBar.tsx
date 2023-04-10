@@ -12,7 +12,6 @@ export const SearchBar = ({ onSearch, onKeyPress }: SearchBarProps) => {
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(event.target.value);
-		console.log(searchTerm);
 	};
 
 	const handleSubmit = (event: SyntheticEvent) => {

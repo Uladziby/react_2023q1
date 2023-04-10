@@ -14,11 +14,9 @@ describe("ModalWindow", () => {
 	renderResult = render(<ModalWindow isShowModal={true} {...props} />);
 
 	it("modal shows with close button", () => {
-		const closeButton = screen.getByTestId("modalCloseButton");
-		const backButton = screen.getByTestId("modalBackButton");
+		const closeButton = screen.getByText("cross_icon.svg");
 
 		userEvent.click(closeButton);
-		userEvent.click(backButton);
 
 		expect(props.children).toEqual(<div>Portal</div>);
 		expect(props.onCloseHandler).toHaveBeenCalled();

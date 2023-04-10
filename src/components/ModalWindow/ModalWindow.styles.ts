@@ -45,18 +45,9 @@ export const StyledText = styled.div`
 	padding-left: 14.5px;
 `;
 
-export const BackButton = styled(AButton)`
-	width: 72px;
-	height: 24px;
-`;
-
 export const CloseButton = styled(AButton)`
 	position: absolute;
 	padding: 5px;
 	top: 16px;
 	right: 16px;
-
-	& svg {
-		pointer-events: none;
-	}
 `;
