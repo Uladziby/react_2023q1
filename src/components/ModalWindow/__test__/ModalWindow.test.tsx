@@ -11,14 +11,11 @@ describe("ModalWindow", () => {
 	};
 	let renderResult: RenderResult;
 
-	beforeEach(() => {
-		renderResult = render(<ModalWindow isShowModal={true} {...props} />);
-	});
+	renderResult = render(<ModalWindow isShowModal={true} {...props} />);
 
 	it("modal shows with close button", () => {
-		const { getAllByRole } = screen;
-
-		const [closeButton, backButton] = getAllByRole(/button/i);
+		const closeButton = screen.getByTestId("modalCloseButton");
+		const backButton = screen.getByTestId("modalBackButton");
 
 		userEvent.click(closeButton);
 		userEvent.click(backButton);

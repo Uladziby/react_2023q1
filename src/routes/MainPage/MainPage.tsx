@@ -28,7 +28,6 @@ export const MainPage = () => {
 
 	useEffect(() => {
 		filterByTitle(searchTerm);
-		console.log(products);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [products]);
 

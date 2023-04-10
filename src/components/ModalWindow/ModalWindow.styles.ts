@@ -21,7 +21,7 @@ export const StyledContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 16px 32px 56px;
+	padding: 16px 32px 16px;
 	gap: 16px;
 	position: absolute;
 	left: 50%;
