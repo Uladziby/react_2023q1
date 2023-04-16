@@ -1,5 +1,5 @@
 /** @format */
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 export const StyledContainer = styled.div`
   padding: 20px;

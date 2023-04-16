@@ -1,6 +1,6 @@
 /** @format */
-import { COLOR_PALETTE } from "../../../constants/colors/colors";
-import styled from "styled-components";
+import { COLOR_PALETTE } from '../../../constants/colors/colors';
+import styled from 'styled-components';
 
 export const StyledLine = styled.div``;
 

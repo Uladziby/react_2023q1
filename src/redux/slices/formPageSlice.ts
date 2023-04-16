@@ -1,6 +1,6 @@
 /** @format */
-import { IFormPageState } from "../../routes/FormPage/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { IFormPageState } from '../../routes/FormPage/types';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface IFormSlice {
   userCards: IFormPageState[];
@@ -11,7 +11,7 @@ const initialState: IFormSlice = {
 };
 
 const formPageSlice = createSlice({
-  name: "formPageSlice",
+  name: 'formPageSlice',
   initialState,
   reducers: {
     addCard(state, { payload }) {

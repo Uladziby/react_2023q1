@@ -1,21 +1,9 @@
 /** @format */
-import {
-  StyledErrorMessage,
-  StyledInput,
-  StyledLabel,
-  StyledWrapper,
-} from "./AInput.styles";
-import { AInputProps } from "./types";
-import { useController } from "react-hook-form";
+import { StyledErrorMessage, StyledInput, StyledLabel, StyledWrapper } from './AInput.styles';
+import { AInputProps } from './types';
+import { useController } from 'react-hook-form';
 
-export const AInput = ({
-  placeholder,
-  label,
-  type,
-  className,
-  name,
-  dataTestId,
-}: AInputProps) => {
+export const AInput = ({ placeholder, label, type, className, name, dataTestId }: AInputProps) => {
   const {
     field,
     fieldState: { error },
@@ -23,7 +11,7 @@ export const AInput = ({
   } = useController({
     name,
     shouldUnregister: true,
-    defaultValue: "",
+    defaultValue: '',
     rules: { required: true },
   });
 
@@ -37,9 +25,7 @@ export const AInput = ({
         placeholder={placeholder}
         type={type}
       />
-      {!isValid && isDirty && (
-        <StyledErrorMessage> {error?.type}</StyledErrorMessage>
-      )}
+      {!isValid && isDirty && <StyledErrorMessage> {error?.type}</StyledErrorMessage>}
     </StyledWrapper>
   );
 };

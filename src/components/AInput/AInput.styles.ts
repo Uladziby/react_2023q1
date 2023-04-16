@@ -1,6 +1,6 @@
 /** @format */
-import { COLOR_PALETTE, INPUT_COLORS } from "../../constants/colors/colors";
-import styled from "styled-components";
+import { COLOR_PALETTE, INPUT_COLORS } from '../../constants/colors/colors';
+import styled from 'styled-components';
 
 export const StyledInput = styled.input`
   width: 343px;

@@ -1,8 +1,8 @@
 /** @format */
-import formPageSlice from "./slices/formPageSlice";
-import { mainApi } from "./slices/mainApi";
-import mainSlice from "./slices/mainSlice";
-import { configureStore } from "@reduxjs/toolkit";
+import formPageSlice from './slices/formPageSlice';
+import { mainApi } from './slices/mainApi';
+import mainSlice from './slices/mainSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
@@ -10,8 +10,7 @@ export const store = configureStore({
     main: mainSlice,
     form: formPageSlice,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(mainApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mainApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,5 +1,5 @@
 /** @format */
-import { IOption } from "./../ASelect/type";
+import { IOption } from './../ASelect/type';
 
 export interface AInputProps {
   type: string;

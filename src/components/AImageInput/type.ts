@@ -1,10 +1,12 @@
 /** @format */
-import { IOption } from "../ASelect/type";
+import { IFormPageState } from '../../routes/FormPage/types';
+import { IOption } from '../ASelect/type';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface AImageInputProps {
   className?: string;
   name?: string;
   value?: string;
-  register: unknown;
+  register: UseFormRegister<IFormPageState>;
   onChange?: (option: IOption) => void;
 }

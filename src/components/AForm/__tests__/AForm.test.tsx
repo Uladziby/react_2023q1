@@ -1,17 +1,17 @@
 /** @format */
-import { AForm } from "../AForm";
-import { fireEvent, render, renderHook, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { useForm } from "react-hook-form";
+import { AForm } from '../AForm';
+import { fireEvent, render, renderHook, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { useForm } from 'react-hook-form';
 
-describe("AForm", () => {
+describe('AForm', () => {
   const { result } = renderHook(() => useForm());
   const form = result.current;
 
   const props = {
     form: form,
     onSubmit: jest.fn(),
-    name: "form",
+    name: 'form',
   };
 
   render(
@@ -21,19 +21,19 @@ describe("AForm", () => {
     </AForm>
   );
 
-  it("should render correctly", () => {
+  it('should render correctly', () => {
     const element = screen.getByRole(/form/i);
 
     expect(element).toBeInTheDocument();
   });
 
-  it("handles children property correctly", () => {
+  it('handles children property correctly', () => {
     const element = screen.getByRole(/group/i);
 
     expect(element.innerHTML).toBe('<input type="text"><input type="submit">');
   });
 
-  it("after submit event property onSubmit should be invoked", async () => {
+  it('after submit event property onSubmit should be invoked', async () => {
     const element = screen.getByRole(/form/i);
 
     fireEvent.submit(element);
@@ -41,7 +41,7 @@ describe("AForm", () => {
     expect(props.onSubmit).toHaveBeenCalled();
   });
 
-  it("after click event on button element onSubmit should be invoked", async () => {
+  it('after click event on button element onSubmit should be invoked', async () => {
     const element = screen.getByRole(/button/i);
 
     userEvent.click(element);

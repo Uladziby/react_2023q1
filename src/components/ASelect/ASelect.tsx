@@ -1,15 +1,15 @@
 /** @format */
-import { StyledErrorMessage, StyledLabel } from "../AInput/AInput.styles";
-import { Select, SelectWrapper } from "./ASelect.styles";
-import { ASelectProps } from "./type";
-import { useController } from "react-hook-form";
+import { StyledErrorMessage, StyledLabel } from '../AInput/AInput.styles';
+import { Select, SelectWrapper } from './ASelect.styles';
+import { ASelectProps } from './type';
+import { useController } from 'react-hook-form';
 
 export const ASelect = ({ name, options }: ASelectProps) => {
   const {
     field,
     fieldState: { error },
     formState: { isValid, isDirty },
-  } = useController({ name, shouldUnregister: true, defaultValue: "" });
+  } = useController({ name, shouldUnregister: true, defaultValue: '' });
 
   return (
     <SelectWrapper>
@@ -19,9 +19,7 @@ export const ASelect = ({ name, options }: ASelectProps) => {
           return <option key={country}>{country}</option>;
         })}
       </Select>
-      {!isValid && isDirty && (
-        <StyledErrorMessage> {error?.type}</StyledErrorMessage>
-      )}
+      {!isValid && isDirty && <StyledErrorMessage> {error?.type}</StyledErrorMessage>}
     </SelectWrapper>
   );
 };

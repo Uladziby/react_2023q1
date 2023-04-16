@@ -1,6 +1,6 @@
 /** @format */
-import styles from "./styles.module.css";
-import { ICardForm } from "./type";
+import styles from './styles.module.css';
+import { ICardForm } from './type';
 
 export const CardForm = ({ data }: ICardForm) => {
   const { firstName, lastName, image, country, birthDay, gender } = data;
@@ -11,13 +11,7 @@ export const CardForm = ({ data }: ICardForm) => {
         {firstName} {lastName}
       </div>
       <div className={styles.block_imgs}>
-        <img
-          className={styles.img}
-          src={image}
-          alt="product"
-          width={200}
-          height={80}
-        />
+        <img className={styles.img} src={image} alt="product" width={200} height={80} />
       </div>
       <div className={styles.block_btn}>
         <div className={styles.card_price}>Country : {country}</div>

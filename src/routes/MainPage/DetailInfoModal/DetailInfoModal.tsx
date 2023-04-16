@@ -1,6 +1,6 @@
 /** @format */
-import { StyledImg, StyledList, StyledRow } from "./DetailInfoModal.styles";
-import { DetailInfoModalProps } from "./type";
+import { StyledImg, StyledList, StyledRow } from './DetailInfoModal.styles';
+import { DetailInfoModalProps } from './type';
 
 export const DetailInfoModal = ({ product }: DetailInfoModalProps) => {
   const { category, description, rating, price, title, image } = product;

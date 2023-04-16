@@ -1,6 +1,6 @@
 /** @format */
-import { ICard } from "../../components/ACard/type";
-import { createSlice } from "@reduxjs/toolkit";
+import { ICard } from '../../components/ACard/type';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface IMainState {
   searchTerm: string;
@@ -11,26 +11,26 @@ interface IMainState {
 
 const initialSelectedProduct: ICard = {
   price: 0,
-  title: "",
-  image: "",
+  title: '',
+  image: '',
   id: 0,
   rating: {
     count: 0,
     rate: 0,
   },
-  description: "",
-  category: "",
+  description: '',
+  category: '',
 };
 
 const initialState: IMainState = {
-  searchTerm: localStorage.getItem("searchTerm") || "",
+  searchTerm: localStorage.getItem('searchTerm') || '',
   searchResult: [],
   filteredProducts: [],
   selectedProduct: initialSelectedProduct,
 };
 
 const mainSlice = createSlice({
-  name: "mainSlice",
+  name: 'mainSlice',
   initialState,
   reducers: {
     setSearchTerm(state, { payload }) {
@@ -46,5 +46,4 @@ const mainSlice = createSlice({
 });
 
 export default mainSlice.reducer;
-export const { setSearchTerm, filterProducts, setSelectedProduct } =
-  mainSlice.actions;
+export const { setSearchTerm, filterProducts, setSelectedProduct } = mainSlice.actions;

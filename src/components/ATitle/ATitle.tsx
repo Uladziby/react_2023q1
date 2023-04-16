@@ -1,6 +1,6 @@
 /** @format */
-import { StyledTitle } from "./ATitle.styles";
-import { IATitleProps } from "./type";
+import { StyledTitle } from './ATitle.styles';
+import { IATitleProps } from './type';
 
 export const ATitle = ({
   size,

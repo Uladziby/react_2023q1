@@ -1,5 +1,5 @@
 /** @format */
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SelectWrapper = styled.div`
   display: flex;

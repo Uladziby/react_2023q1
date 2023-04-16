@@ -1,7 +1,7 @@
 /** @format */
-import { INPUT_COLORS, COLOR_PALETTE } from "../../constants/colors/colors";
-import { AButton } from "../AButton/AButton";
-import styled from "styled-components";
+import { INPUT_COLORS, COLOR_PALETTE } from '../../constants/colors/colors';
+import { AButton } from '../AButton/AButton';
+import styled from 'styled-components';
 
 export const StyledWrapper = styled.div<{ isOptionsVisible: boolean }>`
   width: 100%;
@@ -9,7 +9,7 @@ export const StyledWrapper = styled.div<{ isOptionsVisible: boolean }>`
 
   filter: ${({ isOptionsVisible }) =>
     isOptionsVisible &&
-    "drop-shadow(0px 5px 10px rgba(4, 67, 101, 0.08)) drop-shadow(0px 2px 6px rgba(130, 171, 188, 0.08))"};
+    'drop-shadow(0px 5px 10px rgba(4, 67, 101, 0.08)) drop-shadow(0px 2px 6px rgba(130, 171, 188, 0.08))'};
 `;
 
 export const StyledInput = styled.input`

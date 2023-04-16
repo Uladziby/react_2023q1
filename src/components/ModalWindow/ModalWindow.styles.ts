@@ -1,7 +1,7 @@
 /** @format */
-import { COLOR_PALETTE } from "../../constants/colors/colors";
-import { AButton } from "../AButton/AButton";
-import styled from "styled-components";
+import { COLOR_PALETTE } from '../../constants/colors/colors';
+import { AButton } from '../AButton/AButton';
+import styled from 'styled-components';
 
 const { white, gray900 } = COLOR_PALETTE;
 

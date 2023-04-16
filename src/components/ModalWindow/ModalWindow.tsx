@@ -1,14 +1,9 @@
 /** @format */
-import { ReactComponent as IconCross } from "../../assets/icons/cross_icon.svg";
-import {
-  CloseButton,
-  StyledContainer,
-  StyledCover,
-  StyledHeader,
-} from "./ModalWindow.styles";
-import { ModalWindowProps } from "./type";
-import { MouseEvent } from "react";
-import ReactDOM from "react-dom";
+import { ReactComponent as IconCross } from '../../assets/icons/cross_icon.svg';
+import { CloseButton, StyledContainer, StyledCover, StyledHeader } from './ModalWindow.styles';
+import { ModalWindowProps } from './type';
+import { MouseEvent } from 'react';
+import ReactDOM from 'react-dom';
 
 export const ModalWindow = ({
   children,
@@ -19,7 +14,7 @@ export const ModalWindow = ({
   const onClose = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
 
-    if (e.target === e.currentTarget) onCloseHandler?.();
+    onCloseHandler?.();
   };
 
   const createWrapper = () => (
@@ -38,7 +33,7 @@ export const ModalWindow = ({
       {withBackground && isShowModal
         ? ReactDOM.createPortal(
             <StyledCover onClick={onClose}>{createWrapper()}</StyledCover>,
-            document.getElementById("root") as HTMLElement
+            document.getElementById('root') as HTMLElement
           )
         : createWrapper()}
     </>

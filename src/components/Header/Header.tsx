@@ -1,13 +1,13 @@
 /** @format */
-import styles from "./styles.module.css";
-import { NavLink } from "react-router-dom";
+import styles from './styles.module.css';
+import { NavLink } from 'react-router-dom';
 
 const activeStyle = {
-  background: "#66999b",
-  color: "white",
-  minWidth: "80px",
-  padding: "0 2rem",
-  transition: "all 1s easy",
+  background: '#66999b',
+  color: 'white',
+  minWidth: '80px',
+  padding: '0 2rem',
+  transition: 'all 1s easy',
 };
 
 const Header = () => {
@@ -17,21 +17,21 @@ const Header = () => {
         <div className={styles.navlinks}>
           <NavLink
             className={styles.navlink}
-            to={"/"}
+            to={'/'}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Main
           </NavLink>
           <NavLink
             className={styles.navlink}
-            to={"/aboutus"}
+            to={'/aboutus'}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             About Us
           </NavLink>
           <NavLink
             className={styles.navlink}
-            to={"/forms"}
+            to={'/forms'}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Forms

@@ -1,6 +1,6 @@
 /** @format */
-import { BUTTON_COLORS, COLOR_PALETTE } from "../../constants/colors/colors";
-import styled, { css } from "styled-components";
+import { BUTTON_COLORS, COLOR_PALETTE } from '../../constants/colors/colors';
+import styled, { css } from 'styled-components';
 
 const {
   secondaryDisabled,
@@ -73,8 +73,8 @@ const SIZE = {
 };
 
 export const StyledButton = styled.button<{
-  variant?: "primary" | "secondary" | "primaryTransparent";
-  size?: "extraSmall" | "small" | "medium" | "large";
+  variant?: 'primary' | 'secondary' | 'primaryTransparent';
+  size?: 'extraSmall' | 'small' | 'medium' | 'large';
   isRounded?: boolean;
   isActive?: boolean;
 }>`
@@ -90,7 +90,7 @@ export const StyledButton = styled.button<{
   line-height: 16px;
   ${({ variant }) => variant && VARIANT[variant]};
   ${({ size }) => size && SIZE[size]};
-  border-radius: ${({ isRounded }) => (isRounded ? "2px" : 0)};
+  border-radius: ${({ isRounded }) => (isRounded ? '2px' : 0)};
   fill: ${({ isActive }) => (isActive ? basicWhite : defaultFill)};
   ${({ variant }) => variant && VARIANT[variant]};
 `;

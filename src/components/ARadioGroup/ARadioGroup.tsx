@@ -1,8 +1,8 @@
 /** @format */
-import { StyledErrorMessage } from "../AInput/AInput.styles";
-import { StyledContainer } from "./ARadioGroup.styles";
-import { RadioGroupProps } from "./type";
-import { useController } from "react-hook-form";
+import { StyledErrorMessage } from '../AInput/AInput.styles';
+import { StyledContainer } from './ARadioGroup.styles';
+import { RadioGroupProps } from './type';
+import { useController } from 'react-hook-form';
 
 export const ARadioGroup = ({ name, options }: RadioGroupProps) => {
   const {
@@ -25,9 +25,7 @@ export const ARadioGroup = ({ name, options }: RadioGroupProps) => {
           {option.label}
         </label>
       ))}
-      {!isValid && isDirty && (
-        <StyledErrorMessage> {error?.type}</StyledErrorMessage>
-      )}
+      {!isValid && isDirty && <StyledErrorMessage> {error?.type}</StyledErrorMessage>}
     </StyledContainer>
   );
 };

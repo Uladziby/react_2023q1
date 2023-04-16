@@ -1,10 +1,6 @@
 /** @format */
-import {
-  ProgressBarInner,
-  ProgressBarWrapper,
-  StyledContainer,
-} from "./ProgressBar.styles";
-import { useEffect, useState } from "react";
+import { ProgressBarInner, ProgressBarWrapper, StyledContainer } from './ProgressBar.styles';
+import { useEffect, useState } from 'react';
 
 export const ProgressBar = () => {
   const [percentComplete, setPercentComplete] = useState<number>(0);

@@ -1,10 +1,10 @@
 /** @format */
-import notfound from "../../assets/404.png";
+import notfound from '../../assets/404.png';
 
 const mystyle = {
-  justifyContent: "center",
-  display: "flex",
-  alignItems: "center",
+  justifyContent: 'center',
+  display: 'flex',
+  alignItems: 'center',
   flex: 1,
 };
 

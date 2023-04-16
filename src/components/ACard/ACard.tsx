@@ -1,8 +1,8 @@
 /** @format */
-import { ReactComponent as BasketIcon } from "../../assets/icons/cart.svg";
-import { AButton } from "../AButton/AButton";
-import styles from "./styles.module.css";
-import { ICardProps } from "./type";
+import { ReactComponent as BasketIcon } from '../../assets/icons/cart.svg';
+import { AButton } from '../AButton/AButton';
+import styles from './styles.module.css';
+import { ICardProps } from './type';
 
 export const ACard = ({ item, onShowModal }: ICardProps) => {
   const { price, title, id, rating } = item;

@@ -1,8 +1,8 @@
 /** @format */
-import { AButton } from "./../../components/AButton/AButton";
-import { AInput } from "./../../components/AInput/AInput";
-import { COLOR_PALETTE } from "./../../constants/colors/colors";
-import styled from "styled-components";
+import { AButton } from './../../components/AButton/AButton';
+import { AInput } from './../../components/AInput/AInput';
+import { COLOR_PALETTE } from './../../constants/colors/colors';
+import styled from 'styled-components';
 
 export const StyledContainer = styled.section`
   display: flex;
