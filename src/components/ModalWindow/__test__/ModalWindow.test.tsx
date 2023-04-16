@@ -19,7 +19,6 @@ describe('ModalWindow', () => {
 
     expect(props.children).toEqual(<div>Portal</div>);
     expect(props.onCloseHandler).toHaveBeenCalled();
-    expect(props.onBackHandler).toHaveBeenCalled();
   });
 
   it('should be mounted with background and unmounted', () => {

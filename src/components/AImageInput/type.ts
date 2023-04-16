@@ -1,7 +1,7 @@
 /** @format */
 import { IFormPageState } from '../../routes/FormPage/types';
 import { IOption } from '../ASelect/type';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 
 export interface AImageInputProps {
   className?: string;

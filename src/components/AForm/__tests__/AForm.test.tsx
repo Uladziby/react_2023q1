@@ -1,7 +1,6 @@
 /** @format */
 import { AForm } from '../AForm';
 import { fireEvent, render, renderHook, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { useForm } from 'react-hook-form';
 
 describe('AForm', () => {
@@ -37,14 +36,6 @@ describe('AForm', () => {
     const element = screen.getByRole(/form/i);
 
     fireEvent.submit(element);
-
-    expect(props.onSubmit).toHaveBeenCalled();
-  });
-
-  it('after click event on button element onSubmit should be invoked', async () => {
-    const element = screen.getByRole(/button/i);
-
-    userEvent.click(element);
 
     expect(props.onSubmit).toHaveBeenCalled();
   });

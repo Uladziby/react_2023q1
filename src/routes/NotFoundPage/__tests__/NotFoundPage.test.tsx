@@ -1,11 +1,16 @@
 /** @format */
+import { store } from '../../../redux/store';
 import NotFoundPage from '../NotFoundPage';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import { Provider } from 'react-redux';
 
 describe('NotFoundPage', () => {
   it('renders without crashing', () => {
-    render(<NotFoundPage />);
+    render(
+      <Provider store={store}>
+        <NotFoundPage />
+      </Provider>
+    );
   });
 
   it('renders an image with a valid source and alt text', () => {

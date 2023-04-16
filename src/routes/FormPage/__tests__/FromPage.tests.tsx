@@ -1,11 +1,19 @@
 /** @format */
+import { store } from '../../../redux/store';
 import { FormPage } from '../FormPage';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 
 describe('FormPage', () => {
   it('renders the component with form elements', async () => {
-    await act(async () => render(<FormPage />));
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <FormPage />
+        </Provider>
+      )
+    );
 
     expect(screen.getByPlaceholderText(/First name/i)).toBeInTheDocument();
     expect(screen.getByText(/last name/i)).toBeInTheDocument();
@@ -17,7 +25,13 @@ describe('FormPage', () => {
   });
 
   it('submits the form successfully', async () => {
-    await act(async () => render(<FormPage />));
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <FormPage />
+        </Provider>
+      )
+    );
 
     const firstNameInput = screen.getByPlaceholderText(/First name/i);
     const lastNameInput = screen.getByText(/last name/i);
