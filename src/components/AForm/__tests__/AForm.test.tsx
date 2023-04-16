@@ -5,47 +5,47 @@ import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
 
 describe("AForm", () => {
-	const { result } = renderHook(() => useForm());
-	const form = result.current;
+  const { result } = renderHook(() => useForm());
+  const form = result.current;
 
-	const props = {
-		form: form,
-		onSubmit: jest.fn(),
-		name: "form",
-	};
+  const props = {
+    form: form,
+    onSubmit: jest.fn(),
+    name: "form",
+  };
 
-	render(
-		<AForm {...props}>
-			<input type="text" />
-			<input type="submit" />
-		</AForm>
-	);
+  render(
+    <AForm {...props}>
+      <input type="text" />
+      <input type="submit" />
+    </AForm>
+  );
 
-	it("should render correctly", () => {
-		const element = screen.getByRole(/form/i);
+  it("should render correctly", () => {
+    const element = screen.getByRole(/form/i);
 
-		expect(element).toBeInTheDocument();
-	});
+    expect(element).toBeInTheDocument();
+  });
 
-	it("handles children property correctly", () => {
-		const element = screen.getByRole(/group/i);
+  it("handles children property correctly", () => {
+    const element = screen.getByRole(/group/i);
 
-		expect(element.innerHTML).toBe('<input type="text"><input type="submit">');
-	});
+    expect(element.innerHTML).toBe('<input type="text"><input type="submit">');
+  });
 
-	it("after submit event property onSubmit should be invoked", async () => {
-		const element = screen.getByRole(/form/i);
+  it("after submit event property onSubmit should be invoked", async () => {
+    const element = screen.getByRole(/form/i);
 
-		fireEvent.submit(element);
+    fireEvent.submit(element);
 
-		expect(props.onSubmit).toHaveBeenCalled();
-	});
+    expect(props.onSubmit).toHaveBeenCalled();
+  });
 
-	it("after click event on button element onSubmit should be invoked", async () => {
-		const element = screen.getByRole(/button/i);
+  it("after click event on button element onSubmit should be invoked", async () => {
+    const element = screen.getByRole(/button/i);
 
-		userEvent.click(element);
+    userEvent.click(element);
 
-		expect(props.onSubmit).toHaveBeenCalled();
-	});
+    expect(props.onSubmit).toHaveBeenCalled();
+  });
 });

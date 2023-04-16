@@ -1,5 +1,5 @@
-import { StyledButton } from './AButton.styles';
-import { IAButtonProps } from './type';
+import { StyledButton } from "./AButton.styles";
+import { IAButtonProps } from "./type";
 
 export const AButton = ({
   onClick,
@@ -11,12 +11,12 @@ export const AButton = ({
   link,
   isRounded,
   iconTitle,
-  type = 'button',
+  type = "button",
   className,
   dataTestId,
 }: IAButtonProps) => (
   <StyledButton
-    as={link ? 'a' : 'button'}
+    as={link ? "a" : "button"}
     onClick={onClick}
     title={iconTitle}
     data-testid={dataTestId}

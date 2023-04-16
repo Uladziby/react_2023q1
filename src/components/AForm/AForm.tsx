@@ -1,8 +1,14 @@
-import { ChangeEvent, ComponentProps } from 'react';
-import { FieldValues, FormProvider, SubmitHandler, UseFormReturn } from 'react-hook-form';
-import { StyledFieldset } from './AForm.styles';
+import { StyledFieldset } from "./AForm.styles";
+import { ChangeEvent, ComponentProps } from "react";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  UseFormReturn,
+} from "react-hook-form";
 
-interface FormProps<T extends FieldValues> extends Omit<ComponentProps<'form'>, 'onSubmit'> {
+interface FormProps<T extends FieldValues>
+  extends Omit<ComponentProps<"form">, "onSubmit"> {
   form: UseFormReturn<T>;
   onSubmit?: SubmitHandler<T>;
   name?: string;
@@ -24,7 +30,9 @@ export const AForm = <T extends FieldValues>({
       name={name}
       {...props}
     >
-      <StyledFieldset disabled={form.formState.isSubmitting}>{children}</StyledFieldset>
+      <StyledFieldset disabled={form.formState.isSubmitting}>
+        {children}
+      </StyledFieldset>
     </form>
   </FormProvider>
 );

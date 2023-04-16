@@ -4,13 +4,13 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
 test("render app", () => {
-	render(
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	);
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
 
-	const app = screen.getByTestId("App");
+  const app = screen.getByTestId("App");
 
-	expect(app).toBeInTheDocument();
+  expect(app).toBeInTheDocument();
 });

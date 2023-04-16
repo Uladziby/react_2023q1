@@ -1,83 +1,92 @@
 /** @format */
 import { ACard } from "../../components/ACard/ACard";
-import { ICard } from "../../components/ACard/type";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { ProgressBar } from "../../components/ProgressBar/ProgressBar";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { mainSelector } from "../../redux/selectors/selectors";
+import { useGetAllProductsQuery } from "../../redux/slices/mainApi";
+import {
+  filterProducts,
+  setSearchTerm,
+  setSelectedProduct,
+} from "../../redux/slices/mainSlice";
+import { AppDispatch } from "../../redux/store";
 import { DetailInfoModal } from "./DetailInfoModal/DetailInfoModal";
 import { StyledContainer } from "./MainPage.styles";
-import { getAllProducts } from "./api";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const MainPage = () => {
-	const [products, setProducts] = useState<ICard[]>();
-	const [filteredProducts, setFilteredProducts] = useState<ICard[]>([]);
-	const [searchTerm, setSearchTerm] = useState<string>("");
-	const [isShowModal, setIsShowModal] = useState(false);
-	const [choosedProduct, setChoosedProduct] = useState<ICard>();
-	const [isPending, setIsPending] = useState<boolean>(true);
+  const dispatch = useDispatch<AppDispatch>();
 
-	const handlerToggleModal = (id?: number) => {
-		setIsShowModal(!isShowModal);
-		setChoosedProduct(products?.find((el) => el.id === id));
-	};
+  const { data: products } = useGetAllProductsQuery();
+  const { selectedProduct, filteredProducts, searchTerm } =
+    useSelector(mainSelector);
 
-	useEffect(() => {
-		setSearchTerm(localStorage.getItem("searchTerm") || "");
-		getAllProducts(10).then((response) => {
-			setTimeout(() => {
-				setIsPending(false);
-			}, 1000);
-			setProducts(response);
-		});
-	}, []);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [isPending, setIsPending] = useState<boolean>(true);
 
-	useEffect(() => {
-		setTimeout(() => {
-			filterByTitle(searchTerm);
-			setIsPending(false);
-		}, 1000);
+  const handlerToggleModal = (id?: number) => {
+    setIsShowModal(!isShowModal);
+    dispatch(setSelectedProduct(products?.find((el) => el.id === id)));
+  };
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [products, isPending]);
+  useEffect(() => {
+    setTimeout(() => {
+      filterByTitle(searchTerm);
+      setIsPending(false);
+    }, 1000);
 
-	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const value = event.currentTarget.value;
-		if (event.key === "Enter") {
-			setSearchTerm(value);
-			setIsPending(true);
-		}
-	};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products, isPending]);
 
-	const filterByTitle = (title: string) => {
-		console.log("filterByTitle", title);
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value;
+    if (event.key === "Enter") {
+      filterByTitle(value);
 
-		if (products) {
-			setFilteredProducts(
-				products.filter((product) =>
-					product.title.toLowerCase().includes(title.toLocaleLowerCase())
-				)
-			);
-		}
-	};
+      setIsPending(true);
+    }
+  };
 
-	return (
-		<>
-			{!isPending ? (
-				<StyledContainer>
-					<SearchBar onSearch={filterByTitle} onKeyPress={handleKeyPress} />
-					{filteredProducts.map((item) => (
-						<ACard key={item.id} item={item} onShowModal={handlerToggleModal} />
-					))}
-				</StyledContainer>
-			) : (
-				<ProgressBar />
-			)}
-			{isShowModal && (
-				<ModalWindow withBackground onCloseHandler={handlerToggleModal} isShowModal={isShowModal}>
-					{choosedProduct ? <DetailInfoModal product={choosedProduct} /> : null}
-				</ModalWindow>
-			)}
-		</>
-	);
+  const filterByTitle = (title: string) => {
+    console.log("filterByTitle", title);
+    dispatch(setSearchTerm(title));
+
+    if (products) {
+      dispatch(
+        filterProducts(
+          products.filter((product) =>
+            product.title.toLowerCase().includes(title.toLocaleLowerCase())
+          )
+        )
+      );
+    }
+  };
+
+  return (
+    <>
+      {!isPending ? (
+        <StyledContainer>
+          <SearchBar onSearch={filterByTitle} onKeyPress={handleKeyPress} />
+          {filteredProducts.map((item) => (
+            <ACard key={item.id} item={item} onShowModal={handlerToggleModal} />
+          ))}
+        </StyledContainer>
+      ) : (
+        <ProgressBar />
+      )}
+      {isShowModal && (
+        <ModalWindow
+          withBackground
+          onCloseHandler={handlerToggleModal}
+          isShowModal={isShowModal}
+        >
+          {selectedProduct ? (
+            <DetailInfoModal product={selectedProduct} />
+          ) : null}
+        </ModalWindow>
+      )}
+    </>
+  );
 };
