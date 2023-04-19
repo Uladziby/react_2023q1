@@ -1,6 +1,6 @@
+import { StyledFieldset } from './AForm.styles';
 import { ChangeEvent, ComponentProps } from 'react';
 import { FieldValues, FormProvider, SubmitHandler, UseFormReturn } from 'react-hook-form';
-import { StyledFieldset } from './AForm.styles';
 
 interface FormProps<T extends FieldValues> extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;

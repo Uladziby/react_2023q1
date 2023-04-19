@@ -1,16 +1,20 @@
 /** @format */
-import App from "./App";
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import App from './App';
+import { store } from './redux/store';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-test("render app", () => {
-	render(
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	);
+test('render app', () => {
+  render(
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  );
 
-	const app = screen.getByTestId("App");
+  const app = screen.getByTestId('App');
 
-	expect(app).toBeInTheDocument();
+  expect(app).toBeInTheDocument();
 });
